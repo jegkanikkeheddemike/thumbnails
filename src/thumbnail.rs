@@ -63,7 +63,7 @@ impl Thumbnailer<'_> {
 
     #[cfg(feature = "pdfium")]
     /// Allows pdfium to render landscape thumbnails on landscape pdfs.
-    pub fn allow_landscape(&mut self) {
+    pub fn allow_any_rotation(&mut self) {
         self.settings.pdf_settings.rotation_mode = PDFRotationMode::AllowAny;
     }
 }
