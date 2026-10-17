@@ -16,11 +16,12 @@ impl Thumbnailable for Pdf {
         let h: i32 = thumbnailer.height.try_into()?;
 
         let document = pdfium.load_pdf_from_file(&path, None)?;
-        let render_config = match thumbnailer.settings.pdf_settings.portrait_mode {
-            PDFPortraitMode::ForcePortrait => {
+        let render_config = match thumbnailer.settings.pdf_settings.rotation_mode {
+            PDFRotationMode::ForcePortrait => {
                 PdfRenderConfig::new().scale_page_to_display_size(w, h)
             }
-            PDFPortraitMode::AllowLandscape => PdfRenderConfig::new()
+            PDFRotationMode::AllowAny => PdfRenderConfig::new()
+                .set_target_width(w)
                 .set_maximum_width(w)
                 .set_maximum_height(h),
         };

@@ -64,26 +64,26 @@ impl Thumbnailer<'_> {
     #[cfg(feature = "pdfium")]
     /// Allows pdfium to render landscape thumbnails on landscape pdfs.
     pub fn allow_landscape(&mut self) {
-        self.settings.pdf_settings.portrait_mode = PDFPortraitMode::AllowLandscape;
+        self.settings.pdf_settings.rotation_mode = PDFRotationMode::AllowAny;
     }
 }
 
 #[derive(Debug, Clone, Default)]
-pub (crate) struct ThumbnailSettings {
-    pub (crate) pdf_settings: PDFSettings,
+pub(crate) struct ThumbnailSettings {
+    pub(crate) pdf_settings: PDFSettings,
 }
 
 #[derive(Debug, Clone, Default)]
-pub (crate)struct PDFSettings {
-    pub (crate) portrait_mode: PDFPortraitMode,
+pub(crate) struct PDFSettings {
+    pub(crate) rotation_mode: PDFRotationMode,
 }
 #[derive(Debug, Clone, Copy)]
-pub (crate) enum PDFPortraitMode {
+pub(crate) enum PDFRotationMode {
     ForcePortrait,
-    AllowLandscape,
+    AllowAny,
 }
 
-impl Default for PDFPortraitMode {
+impl Default for PDFRotationMode {
     fn default() -> Self {
         Self::ForcePortrait
     }
